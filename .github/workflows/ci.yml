@@ -41,6 +41,28 @@ jobs:
         with:
           name: sample-report
           path: report/
+      - name: Prepare the live demo site
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: mkdir -p site && cp report/report.html site/index.html && cp report/*.csv site/
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: site
+
+  deploy-demo:
+    # Publishes the demo report at https://nurmohammad126641.github.io/redmine-issue-reporter/
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: demo-report
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
 
   secret-scan:
     runs-on: ubuntu-latest

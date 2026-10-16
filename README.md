@@ -55,7 +55,7 @@ issue-report demo --out report     # builds report/report.html and four CSVs fro
 
 Open `report/report.html` in a browser. The demo data contains an incident week of mobile
 recharge failures, so the red highlighting is visible. CI builds the same report on every push
-and uploads it as the `sample-report` artifact.
+and publishes it as a **[live sample report](https://nurmohammad126641.github.io/redmine-issue-reporter/)**.
 
 ## Using it with your Redmine
 
