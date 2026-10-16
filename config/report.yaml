@@ -1,0 +1,41 @@
+# Report rules. These are examples matching the synthetic demo data; edit them to match the
+# custom fields and teams in your Redmine. No URLs, keys or personal data belong here.
+
+assignee_filter: Tech Ops        # keep only issues assigned to this group; empty = all issues
+weeks: 8                         # number of weekly columns in the report
+highlight_threshold: 50          # totals above this are shown in red
+
+custom_fields:
+  issue_type: Issue Type
+  responsible_team: Responsible Team
+
+resolved_status: Resolved
+
+# An issue is "Transactional" when its type contains any of these phrases (case-insensitive).
+transactional_keywords:
+  - add money
+  - money out
+  - recharge failed
+  - cashback failed
+  - card payment
+  - qr payment
+
+# Who owns which issue types in the summary tables. Unlisted types go to "Unassigned".
+owners:
+  Payments Ops:
+    - Wallet - Add money
+    - Wallet - Money out
+    - Bank - Money out (NPSB)
+    - Card payment failed
+  Recharge & Rewards:
+    - Mobile recharge failed
+    - Cashback failed
+  Merchant Ops:
+    - QR payment failed
+    - Merchant onboarding
+    - Settlement query
+  App Support:
+    - Login / OTP issue
+    - App crash
+    - Profile update
+    - KYC verification

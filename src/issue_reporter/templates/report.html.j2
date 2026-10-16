@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 14px; color: #1f2933; margin: 24px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 28px 0 8px; }
+  .muted { color: #616e7c; }
+  .kpis { margin: 16px 0 8px; }
+  .kpi { display: inline-block; min-width: 130px; padding: 10px 14px; margin: 0 8px 8px 0;
+         border: 1px solid #d9e2ec; border-radius: 6px; background: #f8fafc; }
+  .kpi b { display: block; font-size: 22px; }
+  table { border-collapse: collapse; margin-bottom: 8px; }
+  th, td { border: 1px solid #cbd2d9; padding: 5px 9px; text-align: center; }
+  th { background: #243b53; color: #ffffff; font-weight: 600; }
+  td.text { text-align: left; }
+  tr.total td { background: #e4e7eb; font-weight: 700; }
+  .hot { color: #c62828; font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>{{ title }}</h1>
+<div class="muted">{{ period }} &middot; generated {{ generated }}</div>
+
+<div class="kpis">
+  <span class="kpi"><b>{{ kpis.total }}</b>issues</span>
+  <span class="kpi"><b>{{ kpis.transactional }}</b>transactional</span>
+  <span class="kpi"><b>{{ kpis.non_transactional }}</b>non-transactional</span>
+  <span class="kpi"><b>{{ kpis.open }}</b>still open</span>
+  <span class="kpi"><b>{{ resolved_total }}</b>resolved {{ resolved_day }}</span>
+</div>
+
+{% for section in sections %}
+<h2>{{ section.title }}</h2>
+{% if section.rows %}
+<table>
+  <thead><tr>{% for col in section.columns %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for row in section.rows %}
+    <tr>{% for cell in row %}<td class="{{ cell.css }}">{{ cell.value }}</td>{% endfor %}</tr>
+  {% endfor %}
+  {% if section.totals %}
+    <tr class="total">{% for value in section.totals %}<td>{{ value }}</td>{% endfor %}</tr>
+  {% endif %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No issues in this section.</p>
+{% endif %}
+{% endfor %}
+
+<p class="muted">Totals above {{ threshold }} are highlighted. Detailed issue lists are attached as CSV.</p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redmine-issue-reporter"
+version = "1.0.0"
+description = "Weekly support-issue reports from Redmine: categorised summaries, team matrix, resolved-by stats, HTML email and CSV exports."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nur Mohammad Siddiq" }]
+keywords = ["redmine", "reporting", "automation", "pandas", "jinja2", "email"]
+dependencies = [
+  "requests>=2.31",
+  "pandas>=2.0",
+  "Jinja2>=3.1",
+  "PyYAML>=6.0",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+issue-report = "issue_reporter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+issue_reporter = ["templates/*.html.j2", "data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
