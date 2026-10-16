@@ -16,6 +16,11 @@ attached as CSV. No one has to build the report by hand.
 
 ## What the report contains
 
+[![Sample weekly report](docs/sample-report.png)](https://nurmohammad126641.github.io/redmine-issue-reporter/)
+
+*The [live sample report](https://nurmohammad126641.github.io/redmine-issue-reporter/) is rebuilt by
+CI from synthetic data. The red row is the demo's incident week.*
+
 - **KPI strip:** total issues, transactional vs non-transactional, still open, resolved today.
 - **Transactional issues by owner and week:** add-money, money-out, recharge, cashback, card and
   QR failures, with one column per week and totals. Anything above the threshold is shown in red.
